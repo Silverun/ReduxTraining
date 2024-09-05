@@ -1,8 +1,8 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import store from './store_legacy';
 import Main from './Main';
 import {NavigationContainer} from '@react-navigation/native';
+import store from './store';
 
 function App() {
   return (

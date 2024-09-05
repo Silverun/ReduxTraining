@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Image, FlatList} from 'react-native';
+import {View, Text, Image, FlatList, ActivityIndicator} from 'react-native';
 import {Item} from '../../store_legacy/items/types';
 import {styles} from './ItemList.styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -9,10 +9,11 @@ import {addItemToCart} from '../../store_legacy/cart/actions';
 
 interface ItemsListProps {
   items: Item[];
-  error?: Error | null;
+  error?: string | null;
+  isLoading: boolean;
 }
 
-const ItemsList = ({items, error}: ItemsListProps) => {
+const ItemsList = ({items, error, isLoading}: ItemsListProps) => {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useAppDispatch();
@@ -43,11 +44,19 @@ const ItemsList = ({items, error}: ItemsListProps) => {
     </TouchableOpacity>
   );
 
+  if (isLoading) {
+    return (
+      <View style={styles.loaderContainer}>
+        <ActivityIndicator size="large" color="#020215" />
+        <Text>Loading items</Text>
+      </View>
+    );
+  }
+
   if (error) {
     return (
       <View style={styles.errorContainer}>
-        <Text style={styles.errorTitle}>Oops! Something went wrong.</Text>
-        <Text style={styles.errorMessage}>{error.message}</Text>
+        <Text style={styles.errorMessage}>{error}</Text>
       </View>
     );
   }

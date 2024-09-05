@@ -1,11 +1,20 @@
-import {Dispatch} from 'redux';
-import {getItems} from '../store_legacy/items/actions';
-import {GetItemsAction, Item} from '../store_legacy/items/types';
+import {Item} from '../store_legacy/items/types';
+import {AppDispatch} from '../store';
+import {itemsActions} from '../store/items/itemsSlice';
 
 export const fetchItems = () => {
-  return function (dispatch: Dispatch<GetItemsAction>) {
-    fetch('https://fakestoreapi.com/products?limit=5')
-      .then(res => res.json())
-      .then((data: Item[]) => dispatch(getItems(data)));
+  return async function (dispatch: AppDispatch) {
+    dispatch(itemsActions.fetchingItems());
+
+    try {
+      const response = await fetch('https://fakestoreapi.com/products?limit=5');
+      if (!response.ok) {
+        throw new Error('Something went wrong!');
+      }
+      const items: Item[] = await response.json();
+      dispatch(itemsActions.fetchingItemsSuccess(items));
+    } catch (error) {
+      dispatch(itemsActions.fetchingItemsFailure(error as string));
+    }
   };
 };

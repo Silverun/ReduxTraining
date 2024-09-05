@@ -45,6 +45,11 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: '#333',
   },
+  loaderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   errorContainer: {
     flex: 1,
     justifyContent: 'center',

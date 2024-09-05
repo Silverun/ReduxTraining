@@ -7,19 +7,16 @@ import {fetchItemsSaga} from '../../store_legacy/items/actions';
 
 const HomeScreen = () => {
   const dispatch = useAppDispatch();
-  const {items, error} = useAppSelector(state => state.items);
+  const {error, isLoading, items} = useAppSelector(state => state.items);
 
   useEffect(() => {
-    // async thunk example
-    // dispatch(fetchItems());
-
-    // async Saga example
-    dispatch(fetchItemsSaga());
+    // async Action
+    dispatch(fetchItems());
   }, [dispatch]);
 
   return (
     <View>
-      <ItemsList error={error} items={items} />
+      <ItemsList error={error} items={items} isLoading={isLoading} />
     </View>
   );
 };

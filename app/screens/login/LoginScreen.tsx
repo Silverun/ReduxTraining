@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {View, TextInput, Button, Text, StyleSheet} from 'react-native';
+import {View, TextInput, Button, Text} from 'react-native';
 import {useAppDispatch} from '../../hooks/Redux';
-import {login} from '../../store_legacy/auth/actions';
+import {authActions} from '../../store/auth/authSlice';
+import {styles} from './LoginScreen.styles';
 // import {StackScreenProps} from '@react-navigation/stack';
 // import {RootStackParamList} from '../../Main';
 
@@ -16,7 +17,7 @@ const LoginScreen = () => {
 
   const handleLogin = () => {
     const user = {name, email, password};
-    dispatch(login(user));
+    dispatch(authActions.login(user));
   };
 
   return (
@@ -51,33 +52,5 @@ const LoginScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-    backgroundColor: '#fff',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  input: {
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-    borderRadius: 5,
-  },
-  errorText: {
-    color: 'red',
-    marginBottom: 10,
-    textAlign: 'center',
-  },
-});
 
 export default LoginScreen;
