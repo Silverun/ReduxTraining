@@ -1,26 +1,27 @@
-import {combineReducers, applyMiddleware} from 'redux';
-import logger from './middleware/logger';
-import {thunk} from 'redux-thunk';
-import createSagaMiddleware from 'redux-saga';
-import {rootSagaWatcher} from '../sagas';
+import {combineReducers} from 'redux';
 import {configureStore} from '@reduxjs/toolkit';
 import {authReducer} from './auth/authSlice';
 import {itemsReducer} from './items/itemsSlice';
+import logger from '../middleware/logger';
+import {cartReducer} from './cart/CartSlice';
 
 export type AppState = ReturnType<typeof rootReducer>;
 export type AppStoreType = typeof store;
 export type AppDispatch = AppStoreType['dispatch'];
 export type AppActionsType = Parameters<typeof rootReducer>[1];
 
-const sagaMiddleware = createSagaMiddleware();
+// const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
   auth: authReducer,
   items: itemsReducer,
-  // cart: cartReducer,
+  cart: cartReducer,
 });
 
-const store = configureStore({reducer: rootReducer});
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger),
+});
 
 // const store = createStore(
 //   rootReducer,

@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, Image, FlatList, ActivityIndicator} from 'react-native';
 import {Item} from '../../store_legacy/items/types';
 import {styles} from './ItemList.styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import ItemModal from './modal/ItemModal';
 import {useAppDispatch} from '../../hooks/Redux';
-import {addItemToCart} from '../../store_legacy/cart/actions';
+import {cartActions} from '../../store/cart/CartSlice';
 
 interface ItemsListProps {
   items: Item[];
@@ -18,6 +18,10 @@ const ItemsList = ({items, error, isLoading}: ItemsListProps) => {
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    console.log('Error passed to ItemsList:', error);
+  }, [error]);
+
   const openModal = (item: Item) => {
     setSelectedItem(item);
     setModalVisible(true);
@@ -29,7 +33,8 @@ const ItemsList = ({items, error, isLoading}: ItemsListProps) => {
   };
 
   const handleAddToCart = (item: Item) => {
-    dispatch(addItemToCart(item));
+    // dispatch(addItemToCart(item));
+    dispatch(cartActions.addItemToCart(item));
     closeModal();
   };
 

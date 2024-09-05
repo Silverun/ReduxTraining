@@ -3,7 +3,8 @@ import {View} from 'react-native';
 import {useAppDispatch, useAppSelector} from '../../hooks/Redux';
 import ItemsList from '../../components/items/ItemList';
 import {fetchItems} from '../../asyncActions/items';
-import {fetchItemsSaga} from '../../store_legacy/items/actions';
+import {styles} from './HomeScreen.styles';
+import {fetchItemsAsyncThunk} from '../../asyncActions/itemsAsyncThunk';
 
 const HomeScreen = () => {
   const dispatch = useAppDispatch();
@@ -11,11 +12,12 @@ const HomeScreen = () => {
 
   useEffect(() => {
     // async Action
-    dispatch(fetchItems());
+    // dispatch(fetchItems());
+    dispatch(fetchItemsAsyncThunk());
   }, [dispatch]);
 
   return (
-    <View>
+    <View style={styles.container}>
       <ItemsList error={error} items={items} isLoading={isLoading} />
     </View>
   );

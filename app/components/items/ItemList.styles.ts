@@ -56,16 +56,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
   },
-  errorTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#d32f2f',
-    marginBottom: 10,
-    textAlign: 'center',
-  },
   errorMessage: {
+    color: 'red',
     fontSize: 16,
-    color: '#555',
     textAlign: 'center',
+    margin: 10,
   },
 });

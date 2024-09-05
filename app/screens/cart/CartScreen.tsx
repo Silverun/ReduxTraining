@@ -3,7 +3,7 @@ import {View, Text, FlatList, Button} from 'react-native';
 import {useAppDispatch, useAppSelector} from '../../hooks/Redux';
 import {Item} from '../../store_legacy/items/types';
 import {styles} from './CartScreen.styles';
-import {removeItemFromCart} from '../../store_legacy/cart/actions';
+import {cartActions} from '../../store/cart/CartSlice';
 
 const CartScreen = () => {
   const cartItems = useAppSelector(state => state.cart.items);
@@ -15,7 +15,8 @@ const CartScreen = () => {
   );
 
   const handleRemoveItem = (itemId: number) => {
-    dispatch(removeItemFromCart(itemId));
+    // dispatch(removeItemFromCart(itemId));
+    dispatch(cartActions.removeItemFromCart(itemId));
   };
 
   const renderItem = ({item}: {item: any}) => (
