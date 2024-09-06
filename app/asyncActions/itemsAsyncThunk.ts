@@ -1,11 +1,12 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {Item} from '../store/items/items.types';
+import {API_endpoints} from '../constants/api';
 
 export const fetchItemsAsyncThunk = createAsyncThunk(
   'items/fetchAll',
   async (_, thunkAPI) => {
     try {
-      const response = await fetch('https://fakestoreapi.com/products?limit=6');
+      const response = await fetch(API_endpoints.LOCAL);
       if (!response.ok) {
         throw new Error('Failed to fetch items');
       }

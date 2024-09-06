@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {View, Text, Image, FlatList, ActivityIndicator} from 'react-native';
 import {Item} from '../../store_legacy/items/types';
 import {styles} from './ItemList.styles';
@@ -17,10 +17,6 @@ const ItemsList = ({items, error, isLoading}: ItemsListProps) => {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    console.log('Error passed to ItemsList:', error);
-  }, [error]);
 
   const openModal = (item: Item) => {
     setSelectedItem(item);
