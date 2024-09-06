@@ -9,7 +9,7 @@ import {useAppSelector} from '../hooks/Redux';
 const BotTab = createBottomTabNavigator();
 
 const MainRoute = () => {
-  // const cartItemsCount = useAppSelector(state => state.cart.items.length);
+  const cartItemsCount = useAppSelector(state => state.cart.items.length);
 
   return (
     <BotTab.Navigator screenOptions={{headerShown: false}}>
@@ -18,7 +18,7 @@ const MainRoute = () => {
       <BotTab.Screen
         name={Routes.Cart}
         component={CartScreen}
-        // options={{tabBarBadge: cartItemsCount ? cartItemsCount : undefined}}
+        options={{tabBarBadge: cartItemsCount ? cartItemsCount : undefined}}
       />
     </BotTab.Navigator>
   );
