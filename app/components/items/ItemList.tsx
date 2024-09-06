@@ -6,10 +6,12 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import ItemModal from './modal/ItemModal';
 import {useAppDispatch} from '../../hooks/Redux';
 import {cartActions} from '../../store/cart/CartSlice';
+import {FetchBaseQueryError} from '@reduxjs/toolkit/query';
+import {SerializedError} from '@reduxjs/toolkit';
 
 interface ItemsListProps {
-  items: Item[];
-  error?: string | null;
+  items: Item[] | undefined;
+  error?: FetchBaseQueryError | SerializedError | undefined;
   isLoading: boolean;
 }
 
