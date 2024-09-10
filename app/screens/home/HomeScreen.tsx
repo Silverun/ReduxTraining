@@ -1,20 +1,17 @@
 import React, {useEffect} from 'react';
 import {View} from 'react-native';
-import {useAppDispatch, useAppSelector} from '../../hooks/Redux';
 import ItemsList from '../../components/items/ItemList';
-import {fetchItems} from '../../asyncActions/items';
 import {styles} from './HomeScreen.styles';
-import {fetchItemsAsyncThunk} from '../../asyncActions/itemsAsyncThunk';
+import useHomeScreen from '../../hooks/useHomeScreen';
+import {useItemsSlice} from '../../store/items/itemsSlice';
 
 const HomeScreen = () => {
-  const dispatch = useAppDispatch();
-  const {error, isLoading, items} = useAppSelector(state => state.items);
+  const {error, items, isLoading, getItems} = useItemsSlice();
 
   useEffect(() => {
-    // async Action
-    // dispatch(fetchItems());
-    dispatch(fetchItemsAsyncThunk());
-  }, [dispatch]);
+    getItems();
+    console.log(items, 'items');
+  }, [getItems, items]);
 
   return (
     <View style={styles.container}>

@@ -1,15 +1,13 @@
 import React from 'react';
 import {View, Text, Button, Image} from 'react-native';
-import {useAppDispatch, useAppSelector} from '../../hooks/Redux';
 import {styles} from './ProfileScreen.styles';
-import {authActions} from '../../store/auth/authSlice';
+import {useAuthSlice} from '../../store/auth/authSlice';
 
 const ProfileScreen = () => {
-  const user = useAppSelector(state => state.auth.user);
-  const dispatch = useAppDispatch();
+  const {user, logout} = useAuthSlice(state => state);
 
   const handleLogout = () => {
-    dispatch(authActions.logout());
+    logout();
   };
 
   return (

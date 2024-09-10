@@ -18,3 +18,7 @@ export interface ItemsState {
   isLoading: boolean;
   error: string | null;
 }
+
+export interface ItemsActions {
+  getItems: () => Promise<void>;
+}

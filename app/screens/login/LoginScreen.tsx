@@ -1,23 +1,18 @@
 import React, {useState} from 'react';
 import {View, TextInput, Button, Text} from 'react-native';
-import {useAppDispatch} from '../../hooks/Redux';
-import {authActions} from '../../store/auth/authSlice';
+import {useAuthSlice} from '../../store/auth/authSlice';
 import {styles} from './LoginScreen.styles';
-// import {StackScreenProps} from '@react-navigation/stack';
-// import {RootStackParamList} from '../../Main';
-
-// type Props = StackScreenProps<RootStackParamList, 'Login'>;
 
 const LoginScreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const dispatch = useAppDispatch();
+  const login = useAuthSlice(state => state.login);
 
   const handleLogin = () => {
     const user = {name, email, password};
-    dispatch(authActions.login(user));
+    login(user);
   };
 
   return (

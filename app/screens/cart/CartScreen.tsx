@@ -1,22 +1,18 @@
 import React from 'react';
 import {View, Text, FlatList, Button} from 'react-native';
-import {useAppDispatch, useAppSelector} from '../../hooks/Redux';
-import {Item} from '../../store_legacy/items/types';
 import {styles} from './CartScreen.styles';
-import {cartActions} from '../../store/cart/CartSlice';
+import {useCartSlice} from '../../store/cart/CartSlice';
 
 const CartScreen = () => {
-  const cartItems = useAppSelector(state => state.cart.items);
-  const dispatch = useAppDispatch();
+  const {items, removeItemFromCart} = useCartSlice();
 
-  const totalPrice = cartItems.reduce(
-    (total: number, item: Item) => total + item.price,
+  const totalPrice = items.reduce(
+    (total: number, item) => total + item.price,
     0,
   );
 
   const handleRemoveItem = (itemId: number) => {
-    // dispatch(removeItemFromCart(itemId));
-    dispatch(cartActions.removeItemFromCart(itemId));
+    removeItemFromCart(itemId);
   };
 
   const renderItem = ({item}: {item: any}) => (
@@ -30,7 +26,7 @@ const CartScreen = () => {
   return (
     <View>
       <FlatList
-        data={cartItems}
+        data={items}
         renderItem={renderItem}
         keyExtractor={item => item.id.toString()}
       />

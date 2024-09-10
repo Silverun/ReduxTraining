@@ -1,23 +1,21 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {CartState} from './CartSlice.types';
-import {Item} from '../items/items.types';
+import {CartActions, CartState} from './CartSlice.types';
+import {create} from 'zustand';
+import {immer} from 'zustand/middleware/immer';
 
 const initialCartState: CartState = {
   items: [],
 };
 
-const cartSlice = createSlice({
-  initialState: initialCartState,
-  name: 'cart',
-  reducers: {
-    addItemToCart(state, action: PayloadAction<Item>) {
-      state.items.push(action.payload);
+export const useCartSlice = create<CartState & CartActions>()(
+  immer(set => ({
+    ...initialCartState,
+    addItemToCart(item) {
+      set(state => state.items.push(item));
     },
-    removeItemFromCart(state, action: PayloadAction<number>) {
-      state.items = state.items.filter(item => item.id !== action.payload);
+    removeItemFromCart(id) {
+      set(state => {
+        state.items = state.items.filter(item => item.id !== id);
+      });
     },
-  },
-});
-
-export const cartReducer = cartSlice.reducer;
-export const cartActions = cartSlice.actions;
+  })),
+);

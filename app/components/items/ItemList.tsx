@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import {View, Text, Image, FlatList, ActivityIndicator} from 'react-native';
-import {Item} from '../../store_legacy/items/types';
 import {styles} from './ItemList.styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import ItemModal from './modal/ItemModal';
-import {useAppDispatch} from '../../hooks/Redux';
-import {cartActions} from '../../store/cart/CartSlice';
+import {Item} from '../../store/items/items.types';
+import {useCartSlice} from '../../store/cart/CartSlice';
 
 interface ItemsListProps {
   items: Item[];
@@ -16,7 +15,7 @@ interface ItemsListProps {
 const ItemsList = ({items, error, isLoading}: ItemsListProps) => {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const dispatch = useAppDispatch();
+  const addItemToCart = useCartSlice(state => state.addItemToCart);
 
   const openModal = (item: Item) => {
     setSelectedItem(item);
@@ -30,7 +29,8 @@ const ItemsList = ({items, error, isLoading}: ItemsListProps) => {
 
   const handleAddToCart = (item: Item) => {
     // dispatch(addItemToCart(item));
-    dispatch(cartActions.addItemToCart(item));
+    // dispatch(cartActions.addItemToCart(item));
+    addItemToCart(item);
     closeModal();
   };
 

@@ -9,5 +9,5 @@ function App() {
     </NavigationContainer>
   );
 }
-s;
+
 export default App;
