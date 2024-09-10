@@ -15,14 +15,14 @@ export const useItemsSlice = create<ItemsState & ItemsActions>()(
     ...initialItemsState,
     getItems: async () => {
       try {
-        set(state => (state.isLoading = true));
+        set(state => {
+          state.isLoading = true;
+        });
         const items = await fetchItems();
-        if (items) {
-          set(state => {
-            state.items = items;
-            state.isLoading = false;
-          });
-        }
+        set(state => {
+          state.items = items || [];
+          state.isLoading = false;
+        });
       } catch (error) {
         if (error instanceof AxiosError) {
           set(state => {

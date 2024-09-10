@@ -4,14 +4,10 @@ import ItemsList from '../../components/items/ItemList';
 import {styles} from './HomeScreen.styles';
 import useHomeScreen from '../../hooks/useHomeScreen';
 import {useItemsSlice} from '../../store/items/itemsSlice';
+import useItems from '../../hooks/useHomeScreen';
 
 const HomeScreen = () => {
-  const {error, items, isLoading, getItems} = useItemsSlice();
-
-  useEffect(() => {
-    getItems();
-    console.log(items, 'items');
-  }, [getItems, items]);
+  const {error, items, isLoading} = useItems();
 
   return (
     <View style={styles.container}>

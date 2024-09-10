@@ -10,7 +10,9 @@ export const useCartSlice = create<CartState & CartActions>()(
   immer(set => ({
     ...initialCartState,
     addItemToCart(item) {
-      set(state => state.items.push(item));
+      set(state => {
+        state.items.push(item);
+      });
     },
     removeItemFromCart(id) {
       set(state => {
