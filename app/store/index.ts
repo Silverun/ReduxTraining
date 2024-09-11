@@ -1,7 +1,24 @@
-import {useAuthSlice} from './auth/authSlice';
-import {useItemsSlice} from './items/itemsSlice';
+import {IReactionDisposer, makeAutoObservable, reaction} from 'mobx';
 
-export const storeIndex = {
-  auth: useAuthSlice,
-  items: useItemsSlice,
-};
+export class Store {
+  slices = {};
+
+  reactionDisposer: IReactionDisposer;
+
+  constructor() {
+    this;
+    makeAutoObservable(this);
+    this.reactionDisposer = reaction(
+      () => {},
+      () => {
+        console.log(this.slices);
+      },
+    );
+  }
+
+  destroy() {
+    this.reactionDisposer();
+  }
+}
+
+export const createStore = () => new Store();
