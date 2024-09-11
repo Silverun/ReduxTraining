@@ -1,4 +1,4 @@
-import {IReactionDisposer, makeAutoObservable, reaction} from 'mobx';
+import {autorun, IReactionDisposer, makeAutoObservable, reaction} from 'mobx';
 
 export class Store {
   slices = {};
@@ -8,6 +8,9 @@ export class Store {
   constructor() {
     this;
     makeAutoObservable(this);
+    autorun(() => {
+      console.log();
+    });
     this.reactionDisposer = reaction(
       () => {},
       () => {
