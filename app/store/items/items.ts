@@ -4,7 +4,7 @@ import {fetchItems} from '../../asyncActions/itemsZustand';
 import {AxiosError} from 'axios';
 import {getErrorMessage} from '../../utils/errorMessage';
 
-class ItemsSlice implements ItemsState, ItemsActions {
+export class ItemsSlice implements ItemsState, ItemsActions {
   items: Item[] = [];
   isLoading: boolean = false;
   error: string | null = null;
