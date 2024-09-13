@@ -1,15 +1,20 @@
 import React from 'react';
 import {View, Text, FlatList, Button} from 'react-native';
 import {styles} from './CartScreen.styles';
-import {useCartSlice} from '../../store/cart/CartSlice';
+import useRootStore from '../../context/useStore';
 
 const CartScreen = () => {
-  const {items, removeItemFromCart} = useCartSlice();
+  // const {items, removeItemFromCart} = useCartSlice();
+  const {
+    items,
+    removeItemFromCart,
+    cartTotal: totalPrice,
+  } = useRootStore().cart;
 
-  const totalPrice = items.reduce(
-    (total: number, item) => total + item.price,
-    0,
-  );
+  // const totalPrice = items.reduce(
+  //   (total: number, item) => total + item.price,
+  //   0,
+  // );
 
   const handleRemoveItem = (itemId: number) => {
     removeItemFromCart(itemId);

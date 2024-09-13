@@ -2,16 +2,15 @@ import React, {useEffect} from 'react';
 import {View} from 'react-native';
 import ItemsList from '../../components/items/ItemList';
 import {styles} from './HomeScreen.styles';
-import useHomeScreen from '../../hooks/useHomeScreen';
-import {useItemsSlice} from '../../store/items/itemsSlice';
+import useRootStore from '../../context/useStore';
 
 const HomeScreen = () => {
-  const {error, items, isLoading, getItems} = useItemsSlice();
+  // const {error, items, isLoading, getItems} = useItemsSlice();
+  const {error, items, isLoading, getItems} = useRootStore().items;
 
   useEffect(() => {
     getItems();
-    console.log(items, 'items');
-  }, [getItems, items]);
+  }, [getItems]);
 
   return (
     <View style={styles.container}>

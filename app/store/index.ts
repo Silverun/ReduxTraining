@@ -28,12 +28,16 @@ export class RootStore {
 
   constructor(slices: RootStoreSlices) {
     this.slices = slices;
+    makeAutoObservable(this);
+    console.log('RootStore init');
   }
 
   get auth() {
+    console.log('get auth ran');
     return this.slices.auth;
   }
   get items() {
+    console.log('get items ran');
     return this.slices.items;
   }
   get cart() {

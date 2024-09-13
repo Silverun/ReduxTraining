@@ -1,15 +1,20 @@
 import React from 'react';
 import Main from './Main';
 import {NavigationContainer} from '@react-navigation/native';
-import {rootStore, rootStoreContext} from './store';
+import {RootStoreProvider} from './context/contextProvider';
+import {spy} from 'mobx';
+
+// spy(e => {
+//   console.log(e);
+// });
 
 function App() {
   return (
-    <rootStoreContext.Provider value={rootStore}>
+    <RootStoreProvider>
       <NavigationContainer>
         <Main />
       </NavigationContainer>
-    </rootStoreContext.Provider>
+    </RootStoreProvider>
   );
 }
 

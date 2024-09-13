@@ -1,10 +1,11 @@
 import React from 'react';
 import {View, Text, Button, Image} from 'react-native';
 import {styles} from './ProfileScreen.styles';
-import {useAuthSlice} from '../../store/auth/authSlice';
+import useRootStore from '../../context/useStore';
 
 const ProfileScreen = () => {
-  const {user, logout} = useAuthSlice(state => state);
+  // const {user, logout} = useAuthSlice(state => state);
+  const {user, logout} = useRootStore().auth;
 
   const handleLogout = () => {
     logout();

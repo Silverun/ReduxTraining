@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import LoginScreen from './screens/login/LoginScreen';
 import MainRoute from './routes/MainRoute';
 import {Routes} from './routes';
-import {useAuthSlice} from './store/auth/authSlice';
+import useRootStore from './context/useStore';
+import {observer} from 'mobx-react-lite';
+import {AuthSliceInstance} from './store/auth/auth';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -13,7 +15,13 @@ export type RootStackParamList = {
 const Stack = createStackNavigator<RootStackParamList>();
 
 const Main = () => {
-  const isAuthenticated = useAuthSlice(state => state.isAuthenticated);
+  // const isAuthenticated = useAuthSlice(state => state.isAuthenticated);
+  const isAuthenticated = useRootStore().auth.isAuthenticated;
+  // const isAuthenticated = AuthSliceInstance.isAuthenticated;
+
+  useEffect(() => {
+    console.log('isAuthenticated -', isAuthenticated);
+  }, [isAuthenticated]);
 
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
@@ -25,5 +33,4 @@ const Main = () => {
     </Stack.Navigator>
   );
 };
-
-export default Main;
+export default observer(Main);

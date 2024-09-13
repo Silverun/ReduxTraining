@@ -5,6 +5,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import ItemModal from './modal/ItemModal';
 import {Item} from '../../store/items/items.types';
 import {useCartSlice} from '../../store/cart/CartSlice';
+import useRootStore from '../../context/useStore';
 
 interface ItemsListProps {
   items: Item[];
@@ -15,7 +16,8 @@ interface ItemsListProps {
 const ItemsList = ({items, error, isLoading}: ItemsListProps) => {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
-  const addItemToCart = useCartSlice(state => state.addItemToCart);
+  // const addItemToCart = useCartSlice(state => state.addItemToCart);
+  const addItemToCart = useRootStore().cart.addItemToCart;
 
   const openModal = (item: Item) => {
     setSelectedItem(item);
