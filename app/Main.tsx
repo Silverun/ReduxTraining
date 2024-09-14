@@ -5,7 +5,6 @@ import MainRoute from './routes/MainRoute';
 import {Routes} from './routes';
 import useRootStore from './context/useStore';
 import {observer} from 'mobx-react-lite';
-import {AuthSliceInstance} from './store/auth/auth';
 
 export type RootStackParamList = {
   Login: undefined;
@@ -14,13 +13,11 @@ export type RootStackParamList = {
 
 const Stack = createStackNavigator<RootStackParamList>();
 
-const Main = () => {
-  // const isAuthenticated = useAuthSlice(state => state.isAuthenticated);
+const Main = observer(() => {
   const isAuthenticated = useRootStore().auth.isAuthenticated;
-  // const isAuthenticated = AuthSliceInstance.isAuthenticated;
 
   useEffect(() => {
-    console.log('isAuthenticated -', isAuthenticated);
+    console.log('isAuthenticated from Main -', isAuthenticated);
   }, [isAuthenticated]);
 
   return (
@@ -32,5 +29,6 @@ const Main = () => {
       )}
     </Stack.Navigator>
   );
-};
-export default observer(Main);
+});
+
+export default Main;

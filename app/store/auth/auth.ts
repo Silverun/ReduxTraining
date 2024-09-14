@@ -8,15 +8,15 @@ export class AuthSlice implements AuthState, AuthActions {
   constructor() {
     makeAutoObservable(this);
     reaction(
-      () => this.user,
-      user => {
-        console.log('REACTION: user changed', user);
+      () => this.isAuthenticated,
+      isAuthenticated => {
+        console.log('REACTION: auth changed', isAuthenticated);
       },
     );
   }
 
   login(user: User) {
-    console.log('user inside login action:', user);
+    console.log('User inside login action:', user);
     this.user = user;
     this.isAuthenticated = true;
     console.log('User state after login:', this.isAuthenticated, this.user);

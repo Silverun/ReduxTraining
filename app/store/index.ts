@@ -10,18 +10,6 @@ const rootStoreSlices = {
 };
 
 export type RootStoreSlices = typeof rootStoreSlices;
-// type values = RootStoreSlices[keyof RootStoreSlices];
-// type keys = keyof RootStoreSlices;
-
-// export class RootStore {
-//   [key: string]: RootStoreSlices[keyof RootStoreSlices];
-
-//   constructor(slices: RootStoreSlices) {
-//     for (const key in slices) {
-//       this[key as keyof RootStoreSlices] = slices[key];
-//     }
-//   }
-// }
 
 export class RootStore {
   private slices: RootStoreSlices;
@@ -33,11 +21,10 @@ export class RootStore {
   }
 
   get auth() {
-    console.log('get auth ran');
+    console.log('get auth() ran from RootStore Class');
     return this.slices.auth;
   }
   get items() {
-    console.log('get items ran');
     return this.slices.items;
   }
   get cart() {
