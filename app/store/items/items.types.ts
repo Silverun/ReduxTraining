@@ -17,8 +17,10 @@ export interface ItemsState {
   items: Item[];
   isLoading: boolean;
   error: string | null;
+  totalStoreItems: number;
 }
 
 export interface ItemsActions {
   getItems: () => Promise<void>;
+  getItemsPaged: (page?: number, limit?: number) => Promise<void>;
 }

@@ -10,3 +10,21 @@ export const fetchItems = async () => {
     throw error as AxiosError;
   }
 };
+
+export const fetchItemsPaginated = async (
+  page: number | undefined,
+  limit: number = 3,
+) => {
+  try {
+    const response = await axios.get<Item[]>(
+      `${API_endpoints.LOCAL}?page=${page}&limit=${limit}`,
+    );
+
+    return {
+      items: response.data,
+      totalCount: +response.headers['x-total-count'],
+    };
+  } catch (error) {
+    throw error as AxiosError;
+  }
+};
