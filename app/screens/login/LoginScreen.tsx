@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, TextInput, Button, Text} from 'react-native';
-import {useAuthSlice} from '../../store/auth/authSlice';
+import {auth} from '../../store/auth/authSlice';
 import {styles} from './LoginScreen.styles';
 
 const LoginScreen = () => {
@@ -8,9 +8,14 @@ const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const login = useAuthSlice(state => state.login);
+  const login = auth.login;
+
+  useEffect(() => {
+    console.log('login');
+  }, []);
 
   const handleLogin = () => {
+    console.log('handleLogin');
     const user = {name, email, password};
     login(user);
   };
@@ -42,7 +47,10 @@ const LoginScreen = () => {
       <Button
         title="Login"
         disabled={name && email && password ? false : true}
-        onPress={handleLogin}
+        onPress={() => {
+          console.log('press');
+          handleLogin();
+        }}
       />
     </View>
   );

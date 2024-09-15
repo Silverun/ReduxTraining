@@ -4,7 +4,6 @@ import HomeScreen from '../screens/home/HomeScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
 import {Routes} from '.';
 import CartScreen from '../screens/cart/CartScreen';
-import {useAppSelector} from '../hooks/Redux';
 import {useCartSlice} from '../store/cart/CartSlice';
 
 const BotTab = createBottomTabNavigator();
