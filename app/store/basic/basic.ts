@@ -6,7 +6,7 @@ class Counter {
   constructor() {
     makeAutoObservable(this);
     reaction(
-      reaction => this.count,
+      () => this.count,
       (arg, prev) => {
         console.log('arg: ', arg, 'prev: ', prev);
       },
@@ -22,4 +22,5 @@ class Counter {
   }
 }
 
-export const counter = () => new Counter();
+// export const counter = () => new Counter();
+export const counterStore = new Counter();

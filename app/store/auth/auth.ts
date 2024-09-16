@@ -27,3 +27,5 @@ export class AuthSlice implements AuthState, AuthActions {
     this.isAuthenticated = false;
   }
 }
+
+export const AuthStore = new AuthSlice();

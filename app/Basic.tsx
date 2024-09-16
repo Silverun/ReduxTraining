@@ -1,35 +1,30 @@
 import React from 'react';
 import {StyleSheet, View, Text, Button} from 'react-native';
-import {counter} from './store/basic/basic';
+import {counterStore} from './store/basic/basic';
 import {observer} from 'mobx-react-lite';
+import useRootStore from './context/useStore';
+import {AuthStore} from './store/auth/auth';
+import {createStackNavigator} from '@react-navigation/stack';
+import {RootStackParamList} from './Main';
+import {MainBasicScreen} from './components/basic/mainScreenBasic';
+import {LoginBasicScreen} from './components/basic/loginScreenBasic';
 
-type Props = {
-  counter: ReturnType<typeof counter>;
-};
+// type Props = {
+//   counter: ReturnType<typeof counter>;
+// };
 
-export const Basic = observer(({counter}: Props) => {
+const Stack = createStackNavigator<RootStackParamList>();
+
+export const Basic = observer(() => {
+  const isAuthBasic = useRootStore().auth.isAuthenticated;
+
   return (
-    <>
-      <View style={styles.container}>
-        <Text style={styles.countText}>{counter.count}</Text>
-        <Button title="-" onPress={() => counter.decrement()} />
-        <Button title="+" onPress={() => counter.increment()} />
-      </View>
-    </>
+    <Stack.Navigator>
+      {isAuthBasic ? (
+        <Stack.Screen name="Main" component={MainBasicScreen} />
+      ) : (
+        <Stack.Screen name="Login" component={LoginBasicScreen} />
+      )}
+    </Stack.Navigator>
   );
-});
-
-const styles = StyleSheet.create({
-  container: {
-    borderWidth: 1,
-    borderColor: 'gray',
-    margin: 10,
-    padding: 10,
-    gap: 5,
-  },
-  countText: {
-    textAlign: 'center',
-    fontSize: 20,
-    marginBottom: 10,
-  },
 });

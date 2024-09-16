@@ -1,4 +1,11 @@
-import {action, computed, makeObservable, observable, runInAction} from 'mobx';
+import {
+  action,
+  computed,
+  makeObservable,
+  observable,
+  reaction,
+  runInAction,
+} from 'mobx';
 import {Item, ItemsActions, ItemsState} from './items.types';
 import {fetchItems} from '../../asyncActions/itemsZustand';
 import {AxiosError} from 'axios';
