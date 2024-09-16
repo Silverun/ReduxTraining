@@ -2,9 +2,9 @@ import React from 'react';
 import {View, Text, Button, Image} from 'react-native';
 import {styles} from './ProfileScreen.styles';
 import useRootStore from '../../context/useStore';
+import {observer} from 'mobx-react-lite';
 
-const ProfileScreen = () => {
-  // const {user, logout} = useAuthSlice(state => state);
+const ProfileScreen = observer(() => {
   const {user, logout} = useRootStore().auth;
 
   const handleLogout = () => {
@@ -34,6 +34,6 @@ const ProfileScreen = () => {
       </View>
     </View>
   );
-};
+});
 
 export default ProfileScreen;

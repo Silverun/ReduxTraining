@@ -16,7 +16,7 @@ export class RootStore {
 
   constructor(slices: RootStoreSlices) {
     this.slices = slices;
-    makeAutoObservable(this);
+    makeAutoObservable(this, {}, {autoBind: true});
     console.log('RootStore init');
   }
 

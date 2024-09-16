@@ -1,16 +1,11 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {View} from 'react-native';
 import ItemsList from '../../components/items/ItemList';
 import {styles} from './HomeScreen.styles';
-import useRootStore from '../../context/useStore';
+import useHomeScreen from '../../hooks/useHomeScreen';
 
 const HomeScreen = () => {
-  // const {error, items, isLoading, getItems} = useItemsSlice();
-  const {error, items, isLoading, getItems} = useRootStore().items;
-
-  useEffect(() => {
-    getItems();
-  }, [getItems]);
+  const {error, items, isLoading} = useHomeScreen();
 
   return (
     <View style={styles.container}>

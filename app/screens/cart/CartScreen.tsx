@@ -2,19 +2,14 @@ import React from 'react';
 import {View, Text, FlatList, Button} from 'react-native';
 import {styles} from './CartScreen.styles';
 import useRootStore from '../../context/useStore';
+import {observer} from 'mobx-react-lite';
 
-const CartScreen = () => {
-  // const {items, removeItemFromCart} = useCartSlice();
+const CartScreen = observer(() => {
   const {
     items,
     removeItemFromCart,
     cartTotal: totalPrice,
   } = useRootStore().cart;
-
-  // const totalPrice = items.reduce(
-  //   (total: number, item) => total + item.price,
-  //   0,
-  // );
 
   const handleRemoveItem = (itemId: number) => {
     removeItemFromCart(itemId);
@@ -38,6 +33,6 @@ const CartScreen = () => {
       <Text style={styles.totalPrice}>Total: ${totalPrice.toFixed(2)}</Text>
     </View>
   );
-};
+});
 
 export default CartScreen;

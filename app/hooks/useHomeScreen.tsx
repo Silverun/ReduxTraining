@@ -1,14 +1,12 @@
 import {useEffect} from 'react';
-import {storeIndex} from '../store';
+import useRootStore from '../context/useStore';
 
 const useHomeScreen = () => {
-  const {error, isLoading, getItems, items} = storeIndex.items();
+  const {error, isLoading, items, getItems} = useRootStore().items;
 
   useEffect(() => {
-    console.log('useHomeRan');
     getItems();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getItems]);
 
   return {error, isLoading, items};
 };

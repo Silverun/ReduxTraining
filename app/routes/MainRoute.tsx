@@ -5,11 +5,11 @@ import ProfileScreen from '../screens/profile/ProfileScreen';
 import {Routes} from '.';
 import CartScreen from '../screens/cart/CartScreen';
 import useRootStore from '../context/useStore';
+import {observer} from 'mobx-react-lite';
 
 const BotTab = createBottomTabNavigator();
 
-const MainRoute = () => {
-  // const cartItemsCount = useAppSelector(state => state.cart.items.length);
+const MainRoute = observer(() => {
   const cartItemsCount = useRootStore().cart.items.length;
 
   return (
@@ -23,6 +23,6 @@ const MainRoute = () => {
       />
     </BotTab.Navigator>
   );
-};
+});
 
 export default MainRoute;

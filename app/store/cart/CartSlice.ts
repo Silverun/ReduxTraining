@@ -6,7 +6,7 @@ export class CartSlice implements CartState, CartActions {
   items: Item[] = [];
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this, {}, {autoBind: true});
   }
   addItemToCart(item: Item): void {
     this.items.push(item);
@@ -19,17 +19,3 @@ export class CartSlice implements CartState, CartActions {
     return this.items.reduce((total: number, item) => total + item.price, 0);
   }
 }
-
-// export const useCartSlice = create<CartState & CartActions>()(
-//   immer(set => ({
-//     ...initialCartState,
-//     addItemToCart(item) {
-//       set(state => state.items.push(item));
-//     },
-//     removeItemFromCart(id) {
-//       set(state => {
-//         state.items = state.items.filter(item => item.id !== id);
-//       });
-//     },
-//   })),
-// );

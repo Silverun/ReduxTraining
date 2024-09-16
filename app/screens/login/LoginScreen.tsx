@@ -9,12 +9,20 @@ const LoginScreen = observer(() => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  //Working options, preserved "this" context
+
+  // const rootStore = useRootStore();
+  // const login = useRootStore().auth.login.bind(rootStore.auth);
+
+  //Option below, function loses "this" context after of destructuring and MobX can't track changes
+  //Fixes above or use autoBind: true - option in class State constructor
   const login = useRootStore().auth.login;
 
   const handleLogin = () => {
     const user = {name, email, password};
-    console.log('Login button pressed, with user:', user);
+
     login(user);
+    // rootStore.auth.login(user);
   };
 
   return (

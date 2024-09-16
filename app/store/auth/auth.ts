@@ -6,7 +6,7 @@ export class AuthSlice implements AuthState, AuthActions {
   isAuthenticated: boolean = false;
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this, {}, {autoBind: true});
     reaction(
       () => this.isAuthenticated,
       isAuthenticated => {

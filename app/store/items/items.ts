@@ -1,11 +1,4 @@
-import {
-  action,
-  computed,
-  makeObservable,
-  observable,
-  reaction,
-  runInAction,
-} from 'mobx';
+import {makeAutoObservable, reaction, runInAction} from 'mobx';
 import {Item, ItemsActions, ItemsState} from './items.types';
 import {fetchItems} from '../../asyncActions/itemsZustand';
 import {AxiosError} from 'axios';
@@ -18,14 +11,7 @@ export class ItemsSlice implements ItemsState, ItemsActions {
   nonReactiveHelper: string = 'This is a helper';
 
   constructor() {
-    makeObservable(this, {
-      items: observable,
-      error: observable,
-      getItems: action,
-      isLoading: true, // inferred
-      nonReactiveHelper: false, //non observable
-      itemsCount: computed, // for getters etc
-    });
+    makeAutoObservable(this, {}, {autoBind: true});
   }
 
   get itemsCount() {
